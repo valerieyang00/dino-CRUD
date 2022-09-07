@@ -3,7 +3,7 @@
     <% dinos.forEach((dino, id)=> { %>
 
         <li>
-            <%= dino.name %> is a <%= dino.type %>
+            <a href="/dinosaurs/<%= id %>"><%= dino.name %></a> is a <%= dino.type %>
         </li>
 
         <a href="/dinosaurs/edit/<%= id %>">Edit</a>

@@ -3,11 +3,11 @@
     <% creatures.forEach((creature, id) => { %>
 
 
-       <h4> <%= creature.type %></h4> 
-            <img src="<%= creature.img_url %>" />
+       <h4> <a href="/prehistoric_creatures/<%= id %>"><%= creature.type %></a></h4> 
+            <img src="<%= creature.img_url %>" width = 300 />
         <div>
             <a href="/prehistoric_creatures/edit/<%= id %>">Edit</a>
-            
+
             <form method="POST" action="/prehistoric_creatures/<%= id %>/?_method=DELETE">
                 <input type="submit" value="delete">
             </form></div>
