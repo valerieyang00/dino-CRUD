@@ -2,6 +2,8 @@ const express = require("express")
 const router = express.Router()
 const fs = require("fs")
 router.use(express.urlencoded({ extended: false}))
+const methodOverride = require("method-override")
+router.use(methodOverride("_method"))
 
 //function to get Dinos from DB
 const readDinoFile = () => {
@@ -46,6 +48,39 @@ router.get("/:id", (req, res) => {
     const dino = dinoData[req.params.id]
     // send back a single dino
     res.render("dinos/show.ejs", { dino : dino})
+})
+
+router.delete("/:id", (req,res) => {
+    const dinoData = readDinoFile()
+    const dino = dinoData[req.params.id]
+    // res.render("dinos/edit.ejs")
+    // remove a dinosaur from the array
+    // .splice is an array method that takes 2 arguments:
+    // array.splice(indexToBeginAt, # of things to remove)
+    dinoData.splice(req.params.id, 1)
+    //save the new dinosaurs tot he dinosaurs.json file
+    fs.writeFileSync("./dinosaurs.json", JSON.stringify(dinoData))
+    res.redirect("/dinosaurs")
+})
+
+router.get("/edit/:id", (req, res) => {
+    const dinoData = readDinoFile()
+    const dino = dinoData[req.params.id]
+    res.render("dinos/edit.ejs", { dino: dino, dinoID: req.params.id})
+
+})
+
+router.put('/:id', (req,res) => {
+    const dinoData = readDinoFile()
+
+    // reassign the name and type of the dinosaur we are editing
+    dinoData[req.params.id].name = req.body.name
+    dinoData[req.params.id].type = req.body.type
+
+    // save the edited dinosaurs to the dinosaur.json file
+    fs.writeFileSync('./dinosaurs.json', JSON.stringify(dinoData))
+    res.redirect('/dinosaurs')
+
 })
 
 

@@ -11,6 +11,8 @@ app.set("view engine", "ejs")
 app.use(layout)
 // tell express to listen for request bodies sent from HTML forms
 app.use(express.urlencoded({ extended: false}))
+const methodOverride = require("method-override")
+app.use(methodOverride("_method"))
 
 //Setting up controllers
 app.use("/dinosaurs", require("./controllers/dinos.js"))
