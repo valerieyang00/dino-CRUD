@@ -1,0 +1,15 @@
+<h2>Make a new Prehistoric Creatures:</h2>
+<!-- POST vs GET form
+    GET forms put the data into the query string of the url -- in express you use the req.query (used for READ)
+    POST forms put the data into the request body -- and in express we access it through the req.body (used for CREATE)-->
+
+<form method="POST" action="/prehistoric_creatures">
+    <label for="pcType">Type:</label>
+    <input id="pcType" type="text" name="type" />
+
+    <label for="pcImg">Image URL:</label>
+    <input id="pcImg" type="text" name="img_url" />
+
+    <button type="submit">Create Prehistoric Creature</button>
+
+</form>
